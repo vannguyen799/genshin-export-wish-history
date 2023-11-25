@@ -1,0 +1,1 @@
+# genshin-export-wish-history
