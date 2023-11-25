@@ -31,20 +31,12 @@ class GenshinLocalFile:
         else:
             raise ValueError(f"Couldn't find data_2 file: path {path}")
 
-    def get_character_banner_href(self):
+    def get_banner_history_api(self):
         data = self._get_data_2_content()
         list_url = extract_links_from_text(data)
         list_url.reverse()
         for url_ in list_url:
-            if f'gacha_type={BannerType.CharacterBanner}' in url_:
+            if r'/gacha_info/api/getGachaLog' in url_:
                 return url_
-        raise ValueError('Counld not find character banner href')
+        raise ValueError('Could not find character banner href')
 
-    def get_weapon_banner_href(self):
-        data = self._get_data_2_content()
-        list_url = extract_links_from_text(data)
-        list_url.reverse()
-        for url_ in list_url:
-            if f'gacha_type={BannerType.WeaponBanner}' in url_:
-                return url_
-        raise ValueError('Counld not find weapon banner href')
