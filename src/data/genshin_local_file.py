@@ -5,12 +5,12 @@ from src.util import *
 
 
 class GenshinLocalFile:
-    def __init__(self, genshin_folder_path):
-        # example: D:\Genshin Launcher\Genshin Impact
+    def __init__(self, genshin_folder_path=r'C:\Program Files\Genshin Impact\Genshin Impact game'):
+        # example: C:\Program Files\Genshin Impact\Genshin Impact game
         self._path = genshin_folder_path
 
     def _get_current_webcache_path(self):
-        _wc_path = os.path.join(self._path, r'Genshin Impact game\GenshinImpact_Data\webCaches')
+        _wc_path = os.path.join(self._path, r'GenshinImpact_Data\webCaches')
 
         if os.path.isdir(_wc_path):
             list_folders = [f for f in os.listdir(_wc_path) if os.path.isdir(os.path.join(_wc_path, f))]

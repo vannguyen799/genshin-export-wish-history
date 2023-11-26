@@ -8,7 +8,7 @@ def export_xlsx_test(uid):
     user.export_xlsx()
 
 
-def crawl_data_test(genshin_path='C:\Program Files\Genshin Impact\Genshin Impact game'):
+def crawl_data_test(genshin_path=r'C:\Program Files\Genshin Impact\Genshin Impact game'):
     GLF = GenshinLocalFile(genshin_path)
     api = GLF.get_banner_history_api()
     print(api)
