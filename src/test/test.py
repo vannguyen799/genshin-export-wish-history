@@ -3,9 +3,9 @@ from src.model.user import User
 from src.crawler import *
 
 
-def export_xlsx_test(uid):
+def export_xlsx_test(uid, ignore_3_star=False):
     user = User(uid)
-    user.export_xlsx()
+    user.export_xlsx(ignore_3_star=ignore_3_star)
 
 
 def crawl_data_test(genshin_path=r'C:\Program Files\Genshin Impact\Genshin Impact game'):

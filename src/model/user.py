@@ -76,7 +76,7 @@ class User:
         new_data.extend(current_data[j:])
         return new_data
 
-    def export_xlsx(self, output_file=None):
+    def export_xlsx(self, output_file=None, ignore_3_star=False):
         if output_file is None:
             output_file = export_folder + f'\\{self.UID}_{int(time.time())}.xlsx'
         workbook = None
@@ -91,11 +91,11 @@ class User:
         if 'NormalBanner' not in workbook.sheetnames:
             workbook.create_sheet('NormalBanner')
 
-        for value in tuple(BannerCrawler.history_to_array(self.CharacterBanner)):
+        for value in tuple(BannerCrawler.history_to_array(self.CharacterBanner, ignore_3_star=ignore_3_star)):
             workbook['CharacterBanner'].append(value)
-        for value in tuple(BannerCrawler.history_to_array(self.WeaponBanner)):
+        for value in tuple(BannerCrawler.history_to_array(self.WeaponBanner, ignore_3_star=ignore_3_star)):
             workbook['WeaponBanner'].append(value)
-        for value in tuple(BannerCrawler.history_to_array(self.NormalBanner)):
+        for value in tuple(BannerCrawler.history_to_array(self.NormalBanner, ignore_3_star=ignore_3_star)):
             workbook['NormalBanner'].append(value)
 
         workbook.save(output_file)

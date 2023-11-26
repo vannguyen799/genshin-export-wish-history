@@ -47,7 +47,7 @@ class BannerCrawler:
         return history_data
 
     @staticmethod
-    def history_to_array(history_data: list):
+    def history_to_array(history_data: list, ignore_3_star=False):
         _hd = []
         pity_4 = 1
         pity_5 = 1
@@ -65,6 +65,9 @@ class BannerCrawler:
             else:
                 pity_4 += 1
 
+            if int(h['rank_type']) == 3 and ignore_3_star is True:
+                continue
+
             _hd.append([
                 h['uid'],
                 h['gacha_type'],
@@ -78,5 +81,6 @@ class BannerCrawler:
                 h['id'],
                 pity
             ])
+
         _hd.reverse()
         return _hd
