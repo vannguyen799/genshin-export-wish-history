@@ -31,6 +31,7 @@ class BannerCrawler:
             page = i + 1
             api = edit_url_attribute(api, 'page', page)
             api = edit_url_attribute(api, 'end_id', end_id)
+            time.sleep(time_delay_per_request)
             data_response = requests.get(api).json()
             _data = data_response['data']['list']
 
@@ -41,24 +42,41 @@ class BannerCrawler:
             history_data.extend(_data)
             end_id = history_data[-1]['id']
 
-            time.sleep(time_delay_per_request)
+
         self._last_crawl = history_data
         return history_data
 
     @staticmethod
-    def history_to_array(history_data):
+    def history_to_array(history_data: list):
         _hd = []
+        pity_4 = 1
+        pity_5 = 1
+        history_data.reverse()
         for h in history_data:
+            pity = 0
+            if int(h['rank_type']) == 5:
+                pity = pity_5
+                pity_5 = 1
+            else:
+                pity_5 += 1
+            if int(h['rank_type']) == 4:
+                pity = pity_4
+                pity_4 = 1
+            else:
+                pity_4 += 1
+
             _hd.append([
                 h['uid'],
                 h['gacha_type'],
-                h['item_id'],
-                h['count'],
+                # h['item_id'],
+                # h['count'],
                 h['time'],
                 h['name'],
-                h['lang'],
+                # h['lang'],
                 h['item_type'],
                 h['rank_type'],
                 h['id'],
+                pity
             ])
+        _hd.reverse()
         return _hd
