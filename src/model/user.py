@@ -58,7 +58,7 @@ class User:
         return user_dict
 
     def save(self):
-        with open(self.path, 'w', encoding='utf-8') as u:
+        with open(self.path, 'w', encoding='utf-8', errors='ignore') as u:
             json.dump(self.__dict__(), u, ensure_ascii=False)
         return self
 
