@@ -5,7 +5,8 @@ from src.crawler import *
 
 def export_xlsx_test(uid, ignore_3_star=False):
     user = User(uid)
-    user.export_xlsx(ignore_3_star=ignore_3_star)
+    exported_path = user.export_xlsx(ignore_3_star=ignore_3_star)
+    print(f'Open this file to view exported data: {exported_path}')
 
 
 def crawl_data_test(genshin_path=r'C:\Program Files\Genshin Impact\Genshin Impact game'):
@@ -26,3 +27,4 @@ def crawl_data_test(genshin_path=r'C:\Program Files\Genshin Impact\Genshin Impac
     user.set_weapon_banner(history_data).save()
     history_data = NBC.crawl(user.get_last_normal_banner_id())
     user.set_normal_banner(history_data).save()
+    return user

@@ -101,6 +101,7 @@ class User:
             workbook['NormalBanner'].append(value)
 
         workbook.save(output_file)
+        return output_file
 
     def get_last_character_banner_id(self):
         if self.CharacterBanner is None or len(self.CharacterBanner) == 0:
