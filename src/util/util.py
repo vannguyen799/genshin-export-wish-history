@@ -1,4 +1,6 @@
 import re
+import os
+from static import path_info
 
 
 def remove_non_printable_chars(input_string):
@@ -33,3 +35,23 @@ def copy_file_powershell(src_file_path, des_file_path):
     command = f'Copy-Item -Path "{src_file_path}" -Destination "{des_file_path}"'
     result = subprocess.run(['powershell', '-Command', command], capture_output=True, text=True, check=True)
     return result.stdout
+
+
+def get_file_names(folder_path):
+    try:
+        file_names = [f for f in os.listdir(folder_path) if os.path.isfile(os.path.join(folder_path, f))]
+        return file_names
+    except OSError as e:
+        print(f"Error reading files in folder '{folder_path}': {e}")
+        return []
+
+
+def delete_exported_xlsx(uid):
+    path = path_info.export_folder
+    files_name = get_file_names(path)
+
+    if len(files_name) != 0:
+        for fn in files_name:
+            if fn.startswith(str(uid)):
+                os.remove(f'{path}\\{fn}')
+    return True
