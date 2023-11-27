@@ -11,5 +11,5 @@ if __name__ == '__main__':
     genshin_path = r'C:\Program Files\Genshin Impact\Genshin Impact game'
 
     user = crawl_data_test(genshin_path)
-    delete_exported_xlsx(user.UID)
+
     export_xlsx_test(user.UID, ignore_3_star=False)
