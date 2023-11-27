@@ -66,6 +66,8 @@ class User:
     def add_history_data(current_data: list, last_data: list):
         if current_data is None:
             current_data = []
+        if len(last_data) == 0:
+            return current_data
         last_data_timestamp = last_data[-1]['id']
         j = 0
         for i in range(len(current_data)):

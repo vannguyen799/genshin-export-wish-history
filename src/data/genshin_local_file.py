@@ -1,8 +1,7 @@
 import os
 
-from src.type import BannerType
 from src.util import *
-
+from static.path_info import project_path
 
 class GenshinLocalFile:
     def __init__(self, genshin_folder_path=r'C:\Program Files\Genshin Impact\Genshin Impact game'):
@@ -23,11 +22,11 @@ class GenshinLocalFile:
     def _get_data_2_content(self):
         path = self._get_current_webcache_path() + r'\Cache\Cache_Data\data_2'
 
-        # shutil.copyfile(path, r'../runtime/data_2')
-        # copy_file_path = '../runtime/data_2'
         if os.path.isfile(path):
-            with open(path, 'r', encoding='utf-8', errors='ignore') as data2:
-                return remove_non_printable_chars(data2.read())
+            new_path = f'{project_path}\\src\\data\\data_2'
+            copy_file_powershell(path, new_path)
+            with open(new_path, 'r', encoding='utf-8', errors='ignore') as data2:
+                return remove_non_printable_chars(data2.read()).replace('1/0/', ' ')
         else:
             raise ValueError(f"Couldn't find data_2 file: path {path}")
 

@@ -1,5 +1,5 @@
-from src.data.genshin_local_file import GenshinLocalFile
-from src.model.user import User
+from src.data import GenshinLocalFile
+from src.model import User
 from src.crawler import *
 
 

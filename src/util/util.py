@@ -1,7 +1,5 @@
 import re
 
-from urllib.parse import urlparse, urlencode, parse_qs, urlunparse
-
 
 def remove_non_printable_chars(input_string):
     # Keep only printable ASCII characters
@@ -21,7 +19,7 @@ def extract_links_from_text(text):
 def edit_url_attribute(url_: str, attribute_name, new_attribute_value):
     attribute_index = url_.index(attribute_name)
     before_url = url_[:attribute_index]
-    next_attribute_index = url_.find('&', attribute_index, len(url_)-1)
+    next_attribute_index = url_.find('&', attribute_index, len(url_) - 1)
     after_url = ''
     if next_attribute_index != -1:
         after_url = url_[next_attribute_index:]
@@ -29,3 +27,9 @@ def edit_url_attribute(url_: str, attribute_name, new_attribute_value):
     new_url = f'{before_url}{attribute_name}={new_attribute_value}{after_url}'
     return new_url
 
+
+def copy_file_powershell(src_file_path, des_file_path):
+    import subprocess
+    command = f'Copy-Item -Path "{src_file_path}" -Destination "{des_file_path}"'
+    result = subprocess.run(['powershell', '-Command', command], capture_output=True, text=True, check=True)
+    return result.stdout

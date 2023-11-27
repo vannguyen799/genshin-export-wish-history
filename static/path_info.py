@@ -17,5 +17,3 @@ project_name = 'genshin-export-wish-history'
 project_path = get_project_path(project_name)
 database_folder = project_path + r'\database'
 export_folder = project_path + r'\export'
-
-print(project_path)

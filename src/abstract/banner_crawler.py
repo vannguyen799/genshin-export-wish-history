@@ -17,10 +17,22 @@ class BannerCrawler:
         api = self.api
         api = edit_url_attribute(api, 'page', 1)
         api = edit_url_attribute(api, 'end_id', 0)
-        data_response = requests.get(api).json()
-        uid = data_response['data']['list'][0]['uid']
-        time.sleep(time_delay_per_request)
+        data_response = self.api_get_history(api)
+        uid = data_response[0]['uid']
+
         return uid
+
+    @staticmethod
+    def api_get_history(api):
+        time.sleep(time_delay_per_request)
+        data_response = requests.get(api).json()
+        _data = None
+        try:
+            _data = data_response['data']['list']
+        except TypeError:
+            raise ValueError(f'Api Err: {data_response}.\nTry load Genshin banner history on Genshin app and run again.')
+        return _data
+
 
     def crawl(self, stop_end_id=-1):
         api = self.api
@@ -32,10 +44,14 @@ class BannerCrawler:
             api = edit_url_attribute(api, 'page', page)
             api = edit_url_attribute(api, 'end_id', end_id)
             time.sleep(time_delay_per_request)
-            data_response = requests.get(api).json()
-            _data = data_response['data']['list']
+            _data = self.api_get_history(api)
 
             if len(_data) == 0 or int(stop_end_id) >= int(end_id) and end_id != 0:
+                for h in reversed(history_data):
+                    if int(h['id']) <= int(stop_end_id):
+                        history_data.remove(h)
+                    else:
+                        break
                 print(f'got {len(history_data)} update')
                 break
 

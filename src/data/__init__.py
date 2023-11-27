@@ -1,3 +1,3 @@
-from .genshin_local_file import *
+from src.data.genshin_local_file import *
 
 

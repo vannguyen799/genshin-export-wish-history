@@ -1,1 +1,1 @@
-from .banner_crawler import *
+from src.abstract.banner_crawler import *
