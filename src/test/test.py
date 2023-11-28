@@ -14,17 +14,15 @@ def crawl_data_test(genshin_path=r'C:\Program Files\Genshin Impact\Genshin Impac
     api = GLF.get_banner_history_api()
     print(api)
 
-    CBC = CharacterBannerCrawler(api)
-    WBC = WeaponBannerCrawler(api)
-    NBC = NormalBannerCrawler(api)
+    bannerCrawler = BannerCrawler(api)
 
-    uid = CBC.get_uid()
+    uid = bannerCrawler.get_uid()
     user = User(uid)
     print(f'uid {uid}')
-    history_data = CBC.crawl(user.get_last_character_banner_id())
+    history_data = bannerCrawler.CharacterBannerCrawler.crawl(user.get_last_character_banner_id())
     user.set_character_banner(history_data).save()
-    history_data = WBC.crawl(user.get_last_weapon_banner_id())
+    history_data = bannerCrawler.WeaponBannerCrawler.crawl(user.get_last_weapon_banner_id())
     user.set_weapon_banner(history_data).save()
-    history_data = NBC.crawl(user.get_last_normal_banner_id())
+    history_data = bannerCrawler.NormalBannerCrawler.crawl(user.get_last_normal_banner_id())
     user.set_normal_banner(history_data).save()
     return user

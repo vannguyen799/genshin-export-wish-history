@@ -1,3 +1,3 @@
-from src.crawler.crawler import *
+from .banner_crawler import *
 
 

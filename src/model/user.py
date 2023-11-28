@@ -6,7 +6,7 @@ import time
 
 from static.path_info import database_folder, export_folder
 from openpyxl.workbook import Workbook
-from src.abstract import BannerCrawler
+from src.crawler import BannerCrawler
 
 
 class User:

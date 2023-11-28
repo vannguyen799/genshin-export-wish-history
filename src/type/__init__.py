@@ -1,1 +1,1 @@
-from src.type.banner_type import *
+from .banner_type import *
