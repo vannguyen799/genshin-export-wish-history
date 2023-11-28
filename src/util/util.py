@@ -1,6 +1,6 @@
 import re
 import os
-from static import path_info
+from src import path_info
 
 
 def remove_non_printable_chars(input_string):

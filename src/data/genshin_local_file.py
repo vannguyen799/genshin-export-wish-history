@@ -1,7 +1,5 @@
-import os
-
 from src.util import *
-from static.path_info import project_path
+from src.path_info import project_path
 
 class GenshinLocalFile:
     def __init__(self, genshin_folder_path=r'C:\Program Files\Genshin Impact\Genshin Impact game'):

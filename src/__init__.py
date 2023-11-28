@@ -1,3 +1,3 @@
 from .crawler import BannerCrawler
-from .model import user
+from .model import User
 from .test import test

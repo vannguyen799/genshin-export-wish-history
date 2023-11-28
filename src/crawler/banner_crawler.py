@@ -10,7 +10,7 @@ class BannerCrawler:
     def __init__(self, api, bannerType=BannerType.CharacterBanner):
         api = edit_url_attribute(api, 'init_type', bannerType)
         api = edit_url_attribute(api, 'gacha_type', bannerType)
-
+        api = edit_url_attribute(api, 'lang', 'en')
         self.api = api
         self._banner_type = bannerType
         self._last_crawl = None

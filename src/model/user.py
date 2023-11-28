@@ -4,7 +4,7 @@ import os
 import openpyxl
 import time
 
-from static.path_info import database_folder, export_folder
+from src.path_info import database_folder, export_folder
 from openpyxl.workbook import Workbook
 from src.crawler import BannerCrawler
 
