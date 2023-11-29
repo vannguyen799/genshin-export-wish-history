@@ -1,5 +1,8 @@
+import os
+
 from openpyxl import Workbook
 from src import User, path_info
+from src.util import get_file_names
 
 
 def export_to_paimon_moe_xlsx(user: User, output_path: str = None):
@@ -41,3 +44,14 @@ def _paimon_moe_xlsx_workbook():
     workbook['Weapon Event'].append(header)
     workbook['Standard'].append(header)
     return workbook
+
+
+def delete_exported_xlsx(uid):
+    path = path_info.export_folder
+    files_name = get_file_names(path)
+
+    if len(files_name) != 0:
+        for fn in files_name:
+            if fn.startswith(str(uid)):
+                os.remove(f'{path}\\{fn}')
+    return True

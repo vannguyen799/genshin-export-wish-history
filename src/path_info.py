@@ -2,8 +2,7 @@ import os
 from pathlib import Path
 
 
-def get_project_path(name):
-    path = Path(os.getcwd())
+def get_parent_path(name, path=Path(os.getcwd())):
     while True:
         if path.name == name:
             return path.__str__()
@@ -12,7 +11,8 @@ def get_project_path(name):
         else:
             raise ValueError('?? project path')
 
+
 project_name = 'genshin-export-wish-history'
-project_path = get_project_path(project_name)
+project_path = get_parent_path(project_name)
 database_folder = project_path + r'\database'
 export_folder = project_path + r'\export'

@@ -1,6 +1,5 @@
 import re
 import os
-from src import path_info
 
 
 def remove_non_printable_chars(input_string):
@@ -46,12 +45,9 @@ def get_file_names(folder_path):
         return []
 
 
-def delete_exported_xlsx(uid):
-    path = path_info.export_folder
-    files_name = get_file_names(path)
+def extract_path_from_test(text):
+    pattern = re.compile(
+        r'[A-Za-z]:[/\\](?:[^\n\r/\\:*?"<>|\0]+[/\\])*[^\n\r/\\:*?"<>|\0]+\.\w+')
 
-    if len(files_name) != 0:
-        for fn in files_name:
-            if fn.startswith(str(uid)):
-                os.remove(f'{path}\\{fn}')
-    return True
+    paths = pattern.findall(text)
+    return paths

@@ -9,7 +9,7 @@ def export_xlsx_test(uid, ignore_3_star=False):
     print(f'Open this file to view exported data: {exported_path}')
 
 
-def crawl_data_test(genshin_path=r'C:\Program Files\Genshin Impact\Genshin Impact game'):
+def crawl_data_test(genshin_path=None):
     GLF = GenshinLocalFile(genshin_path)
     api = GLF.get_banner_history_api()
     print(api)

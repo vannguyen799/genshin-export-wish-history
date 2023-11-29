@@ -1,9 +1,14 @@
+import os
+
 from src.util import *
-from src.path_info import project_path
+from src.path_info import *
+
 
 class GenshinLocalFile:
-    def __init__(self, genshin_folder_path=r'C:\Program Files\Genshin Impact\Genshin Impact game'):
+    def __init__(self, genshin_folder_path=None):
         # example: C:\Program Files\Genshin Impact\Genshin Impact game
+        if genshin_folder_path is None:
+            genshin_folder_path = self._find_genshin_path()
         self._path = genshin_folder_path
 
     def _get_current_webcache_path(self):
@@ -36,4 +41,19 @@ class GenshinLocalFile:
             if r'/gacha_info/api/getGachaLog' in url_:
                 return url_
         raise ValueError('Could not find character banner href')
+
+    @staticmethod
+    def _find_genshin_path():
+        path = os.environ['USERPROFILE'] + r'\AppData\LocalLow\miHoYo\Genshin Impact\output_log.txt'
+        print(path)
+        if os.path.isfile(path):
+            with open(path, 'r', encoding='utf-8') as output_log:
+                paths = extract_path_from_test(output_log.read())
+                for p in paths:
+                    if 'Genshin Impact game/GenshinImpact_Data/' in p:
+                        return get_parent_path('Genshin Impact game', path=Path(p))
+
+        else:
+            raise Exception('Could not find genshin path')
+
 
