@@ -57,4 +57,13 @@ class GenshinLocalFile:
         else:
             raise Exception('Could not find genshin path')
 
-
+    @staticmethod
+    def find_uid():
+        path = os.environ['USERPROFILE'] + r'\AppData\LocalLow\miHoYo\Genshin Impact\info.txt'
+        if os.path.isfile(path):
+            with open(path, 'r', encoding='utf-8') as info_txt:
+                info = info_txt.read()
+                _index = info.index('uid:')
+                return info[_index + 4:][:9]
+        else:
+            raise Exception('Could not find genshin path')
