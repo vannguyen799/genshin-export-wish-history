@@ -4,10 +4,10 @@ from src.util import export
 # 2. Run script
 
 if __name__ == '__main__':
-    gensin_folder_path = None
+    genshin_folder_path = None
     history_api = None
 
-    genshin_export = GenshinWishExport(genshin_folder_path=gensin_folder_path, history_api=gensin_folder_path)
+    genshin_export = GenshinWishExport(genshin_folder_path=genshin_folder_path, history_api=genshin_folder_path)
 
     print(genshin_export.get_uid())
 
