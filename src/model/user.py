@@ -10,9 +10,7 @@ from src.crawler import BannerCrawler
 
 
 class User:
-    UID = 000000000
-
-    def __init__(self, uid=UID):
+    def __init__(self, uid):
         self.UID = uid
         self.path = f'{database_folder}\\user\\{self.UID}.json'
         self._data = None
