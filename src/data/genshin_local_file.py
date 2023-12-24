@@ -44,10 +44,10 @@ class GenshinLocalFile:
 
     @staticmethod
     def _find_genshin_path():
-        path = os.environ['USERPROFILE'] + r'\AppData\LocalLow\miHoYo\Genshin Impact\output_log.txt'
+        path = os.environ['USERPROFILE'] + r'\AppData\LocalLow\miHoYo\Genshin Impact\output_log.txt.last'
         if os.path.isfile(path):
             with open(path, 'r', encoding='utf-8') as output_log:
-                paths = extract_path_from_test(output_log.read())
+                paths = extract_path_from_text(output_log.read())
                 for p in paths:
                     if 'Genshin Impact game/GenshinImpact_Data/' in p:
                         g = get_parent_path('Genshin Impact game', path=Path(p))

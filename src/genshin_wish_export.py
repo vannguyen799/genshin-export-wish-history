@@ -2,21 +2,25 @@ from .model import User, UsersManager
 from .data import GenshinLocalFile
 from .crawler import BannerCrawler
 
+
 class GenshinWishExport:
     history_api: str | None = None
 
     def __init__(self, genshin_folder_path=None, history_api=None):
-        self.history_api = history_api
         self.genshin_folder_path = genshin_folder_path
 
         self.genshin_local_file = GenshinLocalFile(genshin_folder_path)
-        self.banner_crawler = BannerCrawler(history_api)
+        self.set_history_api(history_api)
+
+        self.banner_crawler = BannerCrawler(self.history_api)
 
         self.user_manager = UsersManager()
 
         pass
 
     def set_history_api(self, api=None):
+        if api is None:
+            api = self.genshin_local_file.get_banner_history_api()
         self.history_api = api
 
     def get_users(self) -> list[User]:
@@ -50,7 +54,3 @@ class GenshinWishExport:
                 self.banner_crawler.NormalBannerCrawler.crawl(user.get_last_normal_banner_id())
             ).save()
         return user
-
-
-
-

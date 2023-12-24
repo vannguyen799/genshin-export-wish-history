@@ -1,13 +1,20 @@
-from src.test.test import *
-from src.util.export import *
-
+from src import GenshinWishExport
+from src.util import export
 # 1. Open Genshin Impact Game then open banner history
 # 2. Run script
 
 if __name__ == '__main__':
+    gensin_folder_path = None
+    history_api = None
 
-    user = crawl_data_test(genshin_path=None)
+    genshin_export = GenshinWishExport(genshin_folder_path=gensin_folder_path, history_api=gensin_folder_path)
 
-    export_to_paimon_moe_xlsx(user)
+    print(genshin_export.get_uid())
 
-    export_xlsx_test(user.UID, ignore_3_star=False)
+    user = genshin_export.crawl()
+
+    user.export_xlsx(ignore_3_star=False, output_path=None)
+
+    export.export_to_paimon_moe_xlsx(user, output_path=None)
+
+

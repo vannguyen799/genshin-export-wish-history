@@ -45,7 +45,7 @@ def get_file_names(folder_path):
         return []
 
 
-def extract_path_from_test(text):
+def extract_path_from_text(text):
     pattern = re.compile(
         r'[A-Za-z]:[/\\](?:[^\n\r/\\:*?"<>|\0]+[/\\])*[^\n\r/\\:*?"<>|\0]+\.\w+')
 
