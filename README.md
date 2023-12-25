@@ -1,1 +1,1 @@
-# genshin-export-wish-history
+# Genshin Export Wish History
