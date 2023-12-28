@@ -52,8 +52,21 @@ class GenshinLocalFile:
                     if 'Genshin Impact game/GenshinImpact_Data/' in p:
                         g = get_parent_path('Genshin Impact game', path=Path(p))
                         print(f'genshin path: {g}')
-                        return g
+                        if g is not None:
+                            return g
+        else:
+            raise Exception('Could not find genshin path')
 
+        path = os.environ['USERPROFILE'] + r'\AppData\LocalLow\miHoYo\Genshin Impact\output_log.txt'
+        if os.path.isfile(path):
+            with open(path, 'r', encoding='utf-8') as output_log:
+                paths = extract_path_from_text(output_log.read())
+                for p in paths:
+                    if 'Genshin Impact game/GenshinImpact_Data/' in p:
+                        g = get_parent_path('Genshin Impact game', path=Path(p))
+                        print(f'genshin path: {g}')
+                        if g is not None:
+                            return g
         else:
             raise Exception('Could not find genshin path')
 
@@ -67,3 +80,7 @@ class GenshinLocalFile:
                 return info[_index + 4:][:9]
         else:
             raise Exception('Could not find genshin path')
+
+
+if __name__ == '__main__':
+    print(GenshinLocalFile._find_genshin_path())
