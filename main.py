@@ -7,7 +7,7 @@ if __name__ == '__main__':
     genshin_folder_path = None
     history_api = None
 
-    genshin_export = GenshinWishExport(genshin_folder_path=genshin_folder_path, history_api=genshin_folder_path)
+    genshin_export = GenshinWishExport(genshin_folder_path=genshin_folder_path, history_api=history_api)
 
     print(genshin_export.get_uid())
 
