@@ -18,9 +18,14 @@ class User:
         self.WeaponBanner = []
         self.NormalBanner = []
         self.read()
+        self.api_url = None
 
     def set_character_banner(self, history_data):
         self.CharacterBanner = self.add_history_data(self.CharacterBanner, history_data)
+        return self
+
+    def set_api_url(self, api_url):
+        self.api_url = api_url
         return self
 
     def set_weapon_banner(self, history_data):
@@ -38,6 +43,10 @@ class User:
                 self.CharacterBanner = self._data['wish_history']['character_banner']
                 self.WeaponBanner = self._data['wish_history']['weapon_banner']
                 self.NormalBanner = self._data['wish_history']['normal_banner']
+                try:
+                    self.api_url = self._data['api_url']
+                except KeyError:
+                    self.api_url = ''
         else:
             self.save()
             self.read()
@@ -51,6 +60,7 @@ class User:
                 'weapon_banner': self.WeaponBanner,
                 'normal_banner': self.NormalBanner,
             },
+            'api_url': self.api_url,
             'time': datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S").__str__()
         }
         return user_dict

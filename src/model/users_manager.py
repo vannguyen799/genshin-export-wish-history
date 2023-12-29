@@ -1,6 +1,6 @@
 from src.path_info import database_folder, export_folder
 from src.util import util
-from .user import User
+from src.model import User
 
 
 def _query_list_user_uid():
@@ -23,7 +23,12 @@ class UsersManager:
         pass
 
     @staticmethod
-    def get_users():
+    def get_users() -> list[User]:
         uid_list = _query_list_user_uid()
+        uid_list.remove('000000000')
         return [User(uid) for uid in uid_list]
 
+
+
+if __name__ == '__main__':
+    print(_query_list_user_uid())

@@ -40,7 +40,7 @@ class GenshinWishExport:
             self.banner_crawler.api = _history_api
 
         user = User(self.get_uid(_history_api))
-
+        user.set_api_url(_history_api)
         if character_banner:
             user.set_character_banner(
                 self.banner_crawler.CharacterBannerCrawler.crawl(user.get_last_character_banner_id())
