@@ -27,7 +27,7 @@ def menu_choose():
 
 def user_choose(list_user: list[User]):
     for index, user in enumerate(list_user):
-        print(f"""      {index}. uid {user.UID}""")
+        print(f"""\t{index}. uid {user.UID}""")
 
     key = input("select: ")
     if int(key) < len(list_user):
@@ -42,11 +42,12 @@ def user_action_choose():
         1. crawl
         2. export
         3. export paimon moe
+        4. show api
         """
     )
 
     key = input("select: ")
-    if key in ['1', '2', '3']:
+    if key in ['1', '2', '3', '4']:
         return key
     else:
         raise ValueError('PLEASE SELECT CORRECT SELECTION')
@@ -76,10 +77,11 @@ def main():
                 case '2':
                     output_file = user.export_xlsx(ignore_3_star=False, output_file=None)
                     print(f'exported file: {output_file}')
-
                 case '3':
                     output_file = export.export_to_paimon_moe_xlsx(user, output_path=None)
                     print(f'exported file: {output_file}')
+                case '4':
+                    print(user.api_url)
 
         case '3':
             print('hello')
