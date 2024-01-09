@@ -5,7 +5,7 @@ from .crawler import BannerCrawler
 
 class GenshinWishExport:
     history_api: str | None
-    genshin_folder_path = None
+    genshin_folder_path: str | None
 
     def __init__(self, genshin_folder_path=None, history_api=None):
         self.genshin_folder_path = genshin_folder_path

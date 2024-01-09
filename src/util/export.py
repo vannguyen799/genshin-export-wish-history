@@ -11,11 +11,11 @@ def export_to_paimon_moe_xlsx(user: User, output_path: str = None):
     workbook = _paimon_moe_xlsx_workbook()
 
 
-    for h in reversed(user.CharacterBanner):
+    for h in user.CharacterBanner.__reversed__():
         workbook['Character Event'].append(
             (h['item_type'], h['name'], h['time'], h['rank_type'])
         )
-    for h in reversed(user.WeaponBanner):
+    for h in user.WeaponBanner.__reversed__():
         workbook['Weapon Event'].append(
             (h['item_type'], h['name'], h['time'], h['rank_type'])
         )
