@@ -5,21 +5,29 @@ from src import User, path_info
 from src.util import get_file_names
 
 
-def export_to_paimon_moe_xlsx(user: User, output_path: str = None):
+def export_to_paimon_moe_xlsx(user: User, output_path: str = None, __sort='desc'):
     if output_path is None:
         output_path = path_info.export_folder + f'\\{user.UID}_paimon_moe.xlsx'
     workbook = _paimon_moe_xlsx_workbook()
 
+    if __sort is 'desc':
+        character_his = user.CharacterBanner.__reversed__()
+        weapon_his = user.WeaponBanner.__reversed__()
+        normal_his = user.NormalBanner.__reversed__()
+    else:
+        character_his = user.CharacterBanner
+        weapon_his = user.WeaponBanner
+        normal_his = user.NormalBanner
 
-    for h in user.CharacterBanner.__reversed__():
+    for h in character_his:
         workbook['Character Event'].append(
             (h['item_type'], h['name'], h['time'], h['rank_type'])
         )
-    for h in user.WeaponBanner.__reversed__():
+    for h in weapon_his:
         workbook['Weapon Event'].append(
             (h['item_type'], h['name'], h['time'], h['rank_type'])
         )
-    for h in user.NormalBanner.__reversed__():
+    for h in normal_his:
         workbook['Standard'].append(
             (h['item_type'], h['name'], h['time'], h['rank_type'])
         )

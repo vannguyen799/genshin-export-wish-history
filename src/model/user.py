@@ -26,6 +26,7 @@ class User:
 
     def set_api_url(self, api_url):
         self.api_url = api_url
+        print(f'set api {api_url}')
         return self
 
     def set_weapon_banner(self, history_data):

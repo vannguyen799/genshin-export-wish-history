@@ -1,3 +1,5 @@
+from datetime import datetime
+
 import requests
 import time
 
@@ -39,6 +41,8 @@ class BannerCrawler:
     @staticmethod
     def api_get_history(api):
         time.sleep(time_delay_per_request)
+
+        api = edit_url_attribute(api, 'timestamp', int(datetime.now().timestamp()))
         data_response = requests.get(api).json()
         _data = None
         try:
